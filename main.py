@@ -2,6 +2,7 @@
 University of Toronto CSC110 Final Project: Sentiment Analysis of Climate Change Tweets
 Siddarth Dagar, Bradley Mathi, Backer Jackson, Daniel Zhu
 """
+<<<<<<< Updated upstream
 import nltk
 from nltk.corpus import treebank
 
@@ -23,3 +24,8 @@ def tree(sentence: str) -> None:
     entities = nltk.chunk.ne_chunk(tags)
     t = treebank.parsed_sents('wsj_0001.mrg')[0]
     t.draw()
+=======
+
+if __name__ == "__main__":
+    print('Running...')
+>>>>>>> Stashed changes
