@@ -15,7 +15,6 @@ else:
 
 nltk.download('vader_lexicon')
 
-# tweet id's :
 test_set = ["An eye-opening article. This further reinforces the need to switch to a more enviroment \
             friendly lifestyle. @EamonRyan thank you for sharing this!",
             "Bangladesh Confronts Climate Change - book goes open access http://upflow.co/l/Rc88",

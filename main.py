@@ -4,4 +4,4 @@ Siddarth Dagar, Bradley Mathi, Backer Jackson, Daniel Zhu
 """
 
 if __name__ == "__main__":
-    print('Running...')
+    print('Beginning Sentiment Analysis of Tweets...')

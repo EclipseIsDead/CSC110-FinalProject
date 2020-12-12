@@ -25,7 +25,7 @@ test_set = ["An eye-opening article. This further reinforces the need to switch 
 
 def main(sentences: list) -> list:
     """
-    Execute VADER analysis. Return a list of tuples, where (negative, neutral, positive, compound)
+    Execute VADER analysis. Return a list of lists, where [negative, neutral, positive, compound]
      are the scores given. If this were to be run on test_set, the result should be
      [[0.0, 0.665, 0.335, 0.843], [0.192, 0.808, 0.0, -0.2263], [0.329, 0.671, 0.0, -0.9136]]
     :param sentences:
