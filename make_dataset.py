@@ -16,6 +16,18 @@ dataset = 'datasets/tweets.csv'
 target = 'datasets/clean_data.csv'
 
 
+def convert_str_to_date(str_date: str) -> date:
+    """
+    This function is to be used when converting a csv to a pandas dataframe. Each date object is saved as a
+    string, and must be converted back into a date object.
+
+    >>> convert_str_to_date('2020-05-05')
+    datetime.date(2020, 05, 05)
+    """
+    values = str_date.split('-')
+    return date(int(values[0]), int(values[1]), int(values[2]))
+
+
 def count_frequency(dataset: str, keywords: List[str]) -> Dict[str, int]:
     """
     Count_frequency takes a dataset and a list of keywords and counts the number of tweets
@@ -47,10 +59,10 @@ def convert_month_to_int(month: str) -> int:
     return dict[month]
 
 
-def convert_to_datetime(created_at: str) -> date:
+def convert_tweet_to_date(created_at: str) -> date:
     """
     This function takes a string in the format of the dataset and converts it to a date
-    >>> convert_to_datetime('Mon Oct 31 18:21:25 +0000 2016')
+    >>> convert_tweet_to_date('Mon Oct 31 18:21:25 +0000 2016')
     datetime.date(2016, 10, 31)
     """
     x = created_at.split()
@@ -86,7 +98,7 @@ def create_dataset(sentiment_data: str, dataset: str, target: str, keywords: Lis
         x = 0
         for row in reader:
             if x != 0:
-                tweet_date = convert_to_datetime(row[1])
+                tweet_date = convert_tweet_to_date(row[1])
                 tweet_id = int(row[6])
                 tweet_sentiment = sentiment[tweet_id]
                 content = row[17]
