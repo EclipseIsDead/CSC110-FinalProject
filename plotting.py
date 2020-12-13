@@ -6,6 +6,8 @@ import plotly.express as px
 import pandas as pd
 import numpy as np
 
+pd.options.plotting.backend = "plotly"
+
 test = pd.DataFrame([[5.1, 3.5, 0],
                      [4.9, 3.0, 0],
                      [7.0, 3.2, 1],

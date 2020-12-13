@@ -5,6 +5,8 @@ Siddarth Dagar, Bradley Mathi, Backer Jackson, Daniel Zhu
 import pandas as pd
 import vader
 import plotting
+from datetime import date
+
 
 if __name__ == "__main__":
     print('Beginning Sentiment Analysis of Tweets...')
@@ -16,6 +18,8 @@ if __name__ == "__main__":
     data_date_and_vader = [data['date'], data['vader']]
     headers = ['date', 'vader']
     date_and_vader = pd.concat(data_date_and_vader, axis=1, keys=headers)
-    print('Plotting Sentiment towards Climate Change over Time')
+    date_and_vader.set_index('date')
+    print('Plotting Sentiment towards Climate Change over Time...')
+    date_and_vader.index = pd.to_datetime(date_and_vader.date, format='%Y-%m-%d')
     date_and_vader.groupby(pd.Grouper(freq='M')).mean()
     plotting.plot_proper(date_and_vader, 'date', 'vader', 'sentiment', 'Sentiment Over Time')
