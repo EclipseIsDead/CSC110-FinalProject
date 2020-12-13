@@ -5,6 +5,8 @@ Siddarth Dagar, Bradley Mathi, Backer Jackson, Daniel Zhu
 import plotly.express as px
 import numpy as np
 
-def plot_scatter() -> None:
+
+def plot_scatter(x: list, y: list) -> None:
     """Kill me"""
-    
+    fig = px.scatter(x, y)
+    fig.show()
