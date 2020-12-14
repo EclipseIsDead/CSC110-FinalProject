@@ -35,10 +35,10 @@ def evaluate_model(test_labels: pd.Series, test_data: pd.DataFrame, model: xgboo
     new_labels = test_labels.reset_index()
     for index, row in new_labels.iterrows():
         bins[row['sentiment'] + 1].append(predictions[index])
-    neg_accuracy = get_accuracy(-1, bins[0])
-    zero_accuracy = get_accuracy(0, bins[1])
-    one_accuracy = get_accuracy(1, bins[2])
-    two_accuracy = get_accuracy(2, bins[3])
+    neg_accuracy = get_accuracy(-1, bins[0]) * 100
+    zero_accuracy = get_accuracy(0, bins[1]) * 100
+    one_accuracy = get_accuracy(1, bins[2]) * 100
+    two_accuracy = get_accuracy(2, bins[3]) * 100
     labels = [-1, 0, 1, 2]
     fig = go.Figure([go.Bar(x=labels, y=[
         neg_accuracy, zero_accuracy, one_accuracy, two_accuracy
@@ -46,7 +46,7 @@ def evaluate_model(test_labels: pd.Series, test_data: pd.DataFrame, model: xgboo
     fig.update_layout(
         title="Model Accuracy by Sentiment Score",
         xaxis_title="Sentiment Score",
-        yaxis_title="Accuracy",
+        yaxis_title="Accuracy (%)",
     )
     fig.show()
     return accuracy_score(test_labels, predictions)

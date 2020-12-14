@@ -12,6 +12,10 @@ def plot_scatter_df(data: pd.DataFrame, xax: str, yax: str, title: str) -> float
     """
     pd.options.plotting.backend = "plotly"
     fig = px.scatter(data, x=xax, y=yax, title=title, trendline='ols')
+    fig.update_layout(
+        xaxis_title="Date (month)",
+        yaxis_title='Average Vader Sentiment Score',
+    )
     fig.show()
     return px.get_trendline_results(fig).px_fit_results.iloc[0].rsquared
 
