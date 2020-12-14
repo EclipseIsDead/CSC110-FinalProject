@@ -5,6 +5,7 @@ Siddarth Dagar, Bradley Mathi, Backer Jackson, Daniel Zhu
 from nltk.sentiment.vader import SentimentIntensityAnalyzer
 import nltk
 import ssl
+from typing import List
 
 TEST_SET = ["An eye-opening article. This further reinforces the need to switch to a more enviroment \
             friendly lifestyle. @EamonRyan thank you for sharing this!",
@@ -14,7 +15,7 @@ TEST_SET = ["An eye-opening article. This further reinforces the need to switch 
             concert with cynical, deceitful and greedy fossil fuel lobbyists. They fiddle; our kids burn."]
 
 
-def sentiment(sentences: list) -> list:
+def sentiment(sentences: List[str]) -> List[List[float]]:
     """
     Execute VADER analysis. Return a list of lists, where [negative, neutral, positive, compound]
     are the scores given.

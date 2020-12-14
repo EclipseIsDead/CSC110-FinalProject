@@ -6,12 +6,12 @@ import plotly.express as px
 import pandas as pd
 
 
-def plot_scatter_df(data: pd.DataFrame, xax: str, yax: str) -> None:
+def plot_scatter_df(data: pd.DataFrame, xax: str, yax: str, title: str) -> None:
     """
     This function creates a scatter plot using a pandas dataframe.
     """
     pd.options.plotting.backend = "plotly"
-    fig = px.scatter(data, x=xax, y=yax)
+    fig = px.scatter(data, x=xax, y=yax, title=title)
     fig.show()
 
 
