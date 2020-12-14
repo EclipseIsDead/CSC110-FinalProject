@@ -16,12 +16,6 @@ test = pd.DataFrame([[5.1, 3.5, 0],
                     columns=['length', 'width', 'species'])
 
 
-def plot_list(x: list, y: list) -> None:
-    """Lmao"""
-    fig = px.scatter(x, y)
-    fig.show()
-
-
 def plot_scatter_df(data: pd.DataFrame, xax: str, yax: str) -> None:
     """Kill me"""
     fig = px.scatter(data, x=xax, y=yax)
