@@ -27,6 +27,10 @@ def plot_proper(df: pd.DataFrame, xax: str, yax: str, var: str, title: str) -> N
     pd.options.plotting.backend = "plotly"
     fig = df.plot(title=title, template="simple_white",
                   labels=dict(index=xax, value=yax, variable=var))
+    fig.update_layout(
+        xaxis_title=xax,
+        yaxis_title=yax,
+    )
     fig.show()
 
 

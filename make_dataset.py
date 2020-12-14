@@ -109,6 +109,8 @@ def create_dataset(sentiment_data: str, dataset: str, target: str, keywords: Lis
     Create dataset takes out current tweets.csv and creates a new csv file. In this new file
     each tweet is also notated with if it contains the given keyword. The date is also
     converted to datetime
+
+    >>> create_dataset(SENTIMENT_DATASET, TWEETS_DATASET, TARGET_DATASET, KEYWORDS_LIST)
     """
     columns = ['sentiment', 'content', 'tweet_id', 'date', 'retweets'] + keywords
     sentiment = dict()
