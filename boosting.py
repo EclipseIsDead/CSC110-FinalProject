@@ -26,7 +26,7 @@ def evaluate_model(test_labels: pd.Series, test_data: pd.DataFrame, model: xgboo
     one_accuracy = get_accuracy(1, bins[2])
     two_accuracy = get_accuracy(2, bins[3])
     labels = [-1, 0, 1, 2]
-    fig = go.Figure([go.Bar(x=labels, y= [
+    fig = go.Figure([go.Bar(x=labels, y=[
         neg_accuracy, zero_accuracy, one_accuracy, two_accuracy
     ])])
     fig.show()

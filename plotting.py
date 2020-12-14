@@ -4,7 +4,6 @@ Siddarth Dagar, Bradley Mathi, Backer Jackson, Daniel Zhu
 """
 import plotly.express as px
 import pandas as pd
-import numpy as np
 
 pd.options.plotting.backend = "plotly"
 
