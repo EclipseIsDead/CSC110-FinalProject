@@ -15,7 +15,7 @@ TEST_SET = ["An eye-opening article. This further reinforces the need to switch 
             concert with cynical, deceitful and greedy fossil fuel lobbyists. They fiddle; our kids burn."]
 
 
-def sentiment(sentences: List[str]) -> List[List[int]]:
+def sentiment(sentences: List[str]) -> List[List[float]]:
     """
     Execute VADER analysis. Return a list of lists, where [negative, neutral, positive, compound]
     are the scores given.
