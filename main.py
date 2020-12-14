@@ -21,7 +21,7 @@ if __name__ == "__main__":
     print('Plotting Frequency of Keywords towards Climate Change over Time...')
     date_and_freq.index = pd.to_datetime(date_and_freq.date, format='%Y-%m-%d')
     date_and_freq = date_and_freq.groupby(pd.Grouper(freq='M')).sum()
-    plotting.plot_proper(date_and_freq, 'date', 'frequency', 'tweet',
+    plotting.plot_proper(date_and_freq, 'date', 'frequency', 'keyword',
                          'Changes in Sentiment Over Time')
     print('Conducting Sentiment Analysis over time using VADER...')
     data_date_and_vader = [data['date'], data['vader']]
@@ -31,6 +31,6 @@ if __name__ == "__main__":
     date_and_vader.index = pd.to_datetime(date_and_vader.date, format='%Y-%m-%d')
     date_and_vader = date_and_vader.groupby(pd.Grouper(freq='M')).mean()
     date_and_vader['Time'] = date_and_vader.index
-    plotting.plot_scatter_df(date_and_vader, 'Time', 'vader')
+    plotting.plot_scatter_df(date_and_vader, 'Time', 'vader', 'Vader Sentiment Analysis Over Time')
     print('Training XGBoost Model')
     boosting.run_example_model()

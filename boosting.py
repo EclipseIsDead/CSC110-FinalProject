@@ -43,6 +43,11 @@ def evaluate_model(test_labels: pd.Series, test_data: pd.DataFrame, model: xgboo
     fig = go.Figure([go.Bar(x=labels, y=[
         neg_accuracy, zero_accuracy, one_accuracy, two_accuracy
     ])])
+    fig.update_layout(
+        title="Model Accuracy by Sentiment Score",
+        xaxis_title="Sentiment Score",
+        yaxis_title="Accuracy",
+    )
     fig.show()
     return accuracy_score(test_labels, predictions)
 
