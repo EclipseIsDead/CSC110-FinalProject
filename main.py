@@ -5,6 +5,7 @@ Siddarth Dagar, Bradley Mathi, Backer Jackson, Daniel Zhu
 import pandas as pd
 import vader
 import plotting
+import boosting
 
 
 if __name__ == "__main__":
@@ -31,3 +32,5 @@ if __name__ == "__main__":
     date_and_vader = date_and_vader.groupby(pd.Grouper(freq='M')).mean()
     date_and_vader['Time'] = date_and_vader.index
     plotting.plot_scatter_df(date_and_vader, 'Time', 'vader')
+    print('Training XGBoost Model')
+    boosting.run_example_model()

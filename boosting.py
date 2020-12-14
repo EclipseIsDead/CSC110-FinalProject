@@ -75,7 +75,7 @@ def run_example_model() -> None:
     data = clean_csv.drop(['sentiment', 'content', 'tweet_id', 'date'], axis=1)
     labels = clean_csv['sentiment']
     model, _, test_data, _, test_labels = create_model(data, labels, 6, 5)
-    print(evaluate_model(test_labels, test_data, model))
+    print('The accuracy of this model is: ', evaluate_model(test_labels, test_data, model), '%')
 
 
 if __name__ == '__main__':
