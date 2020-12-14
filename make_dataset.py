@@ -1,8 +1,14 @@
 """
+CSC110 Fall 2020 Final Project: Make Dataset Module
+
+This module contains all functions related to cleaning our datasets and merging them
+into one csv. When running this file, the create_dataset doctest will take a significant
+amount of time due to the python_ta checking the contracts. To test create_dataset,
+please disable this.
+
 University of Toronto CSC110 Final Project: Sentiment Analysis of Climate Change Tweets
 Siddarth Dagar, Bradley Mathi, Backer Jackson, Daniel Zhu
 """
-
 import csv
 from typing import List, Dict
 import datetime
@@ -15,6 +21,39 @@ KEYWORDS_LIST = ["trump", "breitbart", "cnn", "fakenews", "fake", "hurricane", "
 SENTIMENT_DATASET = 'datasets/twitter_sentiment_data.csv'
 TWEETS_DATASET = 'datasets/tweets.csv'
 TARGET_DATASET = 'datasets/clean_data.csv'
+
+
+def create_dataset(sentiment_data: str, dataset: str, target: str, keywords: List[str]) -> None:
+    """
+    Create dataset takes out current tweets.csv and creates a new csv file. In this new file
+    each tweet is also notated with if it contains the given keyword. The date is also
+    converted to datetime
+
+    >>> create_dataset(SENTIMENT_DATASET, TWEETS_DATASET, TARGET_DATASET, KEYWORDS_LIST)
+    """
+    columns = ['sentiment', 'content', 'tweet_id', 'date', 'retweets'] + keywords
+    sentiment = dict()
+    with open(sentiment_data, 'r') as sentiment_csv:
+        reader = csv.reader(sentiment_csv, delimiter=',')
+        x = 0
+        for row in reader:
+            if x != 0:
+                tweet_id = int(row[2])
+                tweet_sentiment = int(row[0])
+                sentiment[tweet_id] = tweet_sentiment
+            else:
+                x = 1
+
+    tweets = []
+    with open(dataset, 'r') as data:
+        reader = csv.reader(data, delimiter=',')
+        x = 0
+        for row in reader:
+            if x != 0:
+                tweets.append(clean_row(row, keywords, sentiment))
+            else:
+                x = 1
+    write_csv(target, columns, tweets)
 
 
 def convert_str_to_date(str_date: str) -> datetime.date:
@@ -102,39 +141,6 @@ def clean_row(row: List[str], keywords: List[str], sentiment: Dict[int, int]) ->
         else:
             keyword_in_tweet.append(0)
     return [tweet_sentiment, content, tweet_id, tweet_date, tweet_retweets] + keyword_in_tweet
-
-
-def create_dataset(sentiment_data: str, dataset: str, target: str, keywords: List[str]) -> None:
-    """
-    Create dataset takes out current tweets.csv and creates a new csv file. In this new file
-    each tweet is also notated with if it contains the given keyword. The date is also
-    converted to datetime
-
-    >>> create_dataset(SENTIMENT_DATASET, TWEETS_DATASET, TARGET_DATASET, KEYWORDS_LIST)
-    """
-    columns = ['sentiment', 'content', 'tweet_id', 'date', 'retweets'] + keywords
-    sentiment = dict()
-    with open(sentiment_data, 'r') as sentiment_csv:
-        reader = csv.reader(sentiment_csv, delimiter=',')
-        x = 0
-        for row in reader:
-            if x != 0:
-                tweet_id = int(row[2])
-                tweet_sentiment = int(row[0])
-                sentiment[tweet_id] = tweet_sentiment
-            else:
-                x = 1
-
-    tweets = []
-    with open(dataset, 'r') as data:
-        reader = csv.reader(data, delimiter=',')
-        x = 0
-        for row in reader:
-            if x != 0:
-                tweets.append(clean_row(row, keywords, sentiment))
-            else:
-                x = 1
-    write_csv(target, columns, tweets)
 
 
 if __name__ == '__main__':

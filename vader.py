@@ -1,13 +1,20 @@
 """
+CSC110 Fall 2020 Final Project: Vader Module
+
+This module contains all functions related to sentiment analysis. To do this analysis,
+we use the nltk package and vader sentiment scores. The ssl._create_unverified_context
+is necessary for downloading the vader library.
+
 University of Toronto CSC110 Final Project: Sentiment Analysis of Climate Change Tweets
 Siddarth Dagar, Bradley Mathi, Backer Jackson, Daniel Zhu
 """
-from nltk.sentiment.vader import SentimentIntensityAnalyzer
-import nltk
 import ssl
 from typing import List
+from nltk.sentiment.vader import SentimentIntensityAnalyzer
+import nltk
 
-TEST_SET = ["An eye-opening article. This further reinforces the need to switch to a more enviroment \
+TEST_SET = ["An eye-opening article. This further reinforces the need to switch "
+            "to a more enviroment \
             friendly lifestyle. @EamonRyan thank you for sharing this!",
             "Bangladesh Confronts Climate Change - book goes open access http://upflow.co/l/Rc88",
             "If there’s a definition of insanity it’s Australia’s policies on climate change \
@@ -46,7 +53,8 @@ if __name__ == '__main__':
     import python_ta
 
     python_ta.check_all(config={
-        'extra-imports': ['nltk.sentiment.vader', 'nltk', 'ssl'],
+        'extra-imports': ['nltk.sentiment.vader', 'nltk', 'ssl',
+                          'python_ta.contracts'],
         'allowed-io': [],
         'max-line-length': 100,
         'disable': ['R1705', 'C0200']

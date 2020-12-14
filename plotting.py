@@ -1,4 +1,8 @@
 """
+CSC110 Fall 2020 Final Project: Plotting Module
+
+This module contains all functions necessary for plotting our graphs
+
 University of Toronto CSC110 Final Project: Sentiment Analysis of Climate Change Tweets
 Siddarth Dagar, Bradley Mathi, Backer Jackson, Daniel Zhu
 """

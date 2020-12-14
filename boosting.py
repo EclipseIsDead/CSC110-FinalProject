@@ -1,4 +1,9 @@
 """
+CSC110 Fall 2020 Final Project: Modeling Module
+
+This module contains all functions related to creating a model of our data.
+We create the model using XGBoost, which is an easy-to-use machine learning package.
+
 University of Toronto CSC110 Final Project: Sentiment Analysis of Climate Change Tweets
 Siddarth Dagar, Bradley Mathi, Backer Jackson, Daniel Zhu
 """
@@ -14,8 +19,9 @@ import vader
 def create_model(data: pd.DataFrame, labels: pd.DataFrame, max_depth: int, n_estimators: int) \
         -> Tuple[xgboost.XGBClassifier, pd.DataFrame, pd.DataFrame, pd.Series, pd.Series]:
     """
-    Create model will train an XGBoost model based on the given parameters. It returns a tuple with
-    the model the training data, the training labels, the testing data, and the testing labels
+    Create model will train an XGBoost classification model based on the given parameters.
+    It returns a tuple with the model the training data, the training labels,
+    the testing data, and the testing labels
     """
     train_data, test_data = train_test_split(data, random_state=1)
     train_labels, test_labels = train_test_split(labels, random_state=1)

@@ -1,4 +1,9 @@
 """
+CSC110 Fall 2020 Final Project: Main Module
+
+This module contains the synthesis of all of our work. When run, it does sentiment analysis
+on our dataset and graphs important trends.
+
 University of Toronto CSC110 Final Project: Sentiment Analysis of Climate Change Tweets
 Siddarth Dagar, Bradley Mathi, Backer Jackson, Daniel Zhu
 """
@@ -15,8 +20,8 @@ if __name__ == "__main__":
     print('Conducting Frequency Analysis using Pandas...')
     sentiments = vader.sentiment(data['content'].tolist())
     data['vader'] = [x[3] for x in sentiments]
-    data_date_and_freq = [data['date'], data['hoax'], data['hurricane'], data['fake']]
     headers = ['date', 'hoax', 'hurricane', 'fake']
+    data_date_and_freq = [data[label] for label in headers]
     date_and_freq = pd.concat(data_date_and_freq, axis=1, keys=headers)
     print('Plotting Frequency of Keywords towards Climate Change over Time...')
     date_and_freq.index = pd.to_datetime(date_and_freq.date, format='%Y-%m-%d')
