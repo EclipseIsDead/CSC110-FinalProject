@@ -18,7 +18,7 @@ test = pd.DataFrame([[5.1, 3.5, 0],
 
 def plot_scatter_df(data: pd.DataFrame, xax: str, yax: str) -> None:
     """Kill me"""
-    fig = px.scatter(data, x=xax, y=yax, trendline="ols")
+    fig = px.scatter(data, x=xax, y=yax)
     fig.show()
 
 
