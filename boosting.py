@@ -1,0 +1,69 @@
+"""
+University of Toronto CSC110 Final Project: Sentiment Analysis of Climate Change Tweets
+Siddarth Dagar, Bradley Mathi, Backer Jackson, Daniel Zhu
+"""
+import xgboost
+from sklearn.metrics import accuracy_score
+from sklearn.model_selection import train_test_split
+import pandas as pd
+from typing import Tuple, List
+import vader
+import plotly.graph_objects as go
+
+
+def evaluate_model(test_labels: pd.Series, test_data: pd.DataFrame, model: xgboost.XGBClassifier) -> float:
+    """
+    Returns a float which is the accuracy score of the model. Also creates graph
+    of accuracy by predicted value.
+    """
+    predictions = model.predict(test_data)
+    bins = [[], [], [], []]
+    new_labels = test_labels.reset_index()
+    for index, row in new_labels.iterrows():
+        bins[row['sentiment'] + 1].append(predictions[index])
+    neg_accuracy = get_accuracy(-1, bins[0])
+    zero_accuracy = get_accuracy(0, bins[1])
+    one_accuracy = get_accuracy(1, bins[2])
+    two_accuracy = get_accuracy(2, bins[3])
+    labels = [-1, 0, 1, 2]
+    fig = go.Figure([go.Bar(x=labels, y= [
+        neg_accuracy, zero_accuracy, one_accuracy, two_accuracy
+    ])])
+    fig.show()
+    return accuracy_score(test_labels, predictions)
+
+
+def get_accuracy(expected_label: int, predictions: List[int]) -> float:
+    """
+    This is used in the evaluate_model function. We return the percentage of
+    items in the list that are equal to the expected_label
+    """
+    length = len(predictions)
+    matching = 0
+    for i in predictions:
+        if i == expected_label:
+            matching += 1
+    return matching / length
+
+
+def create_model(data: pd.DataFrame, labels: pd.DataFrame, max_depth: int, n_estimators: int) \
+        -> Tuple[xgboost.XGBClassifier, pd.DataFrame, pd.DataFrame, pd.Series, pd.Series]:
+    """
+    Create model will train an XGBoost model based on the given parameters. It returns a tuple with the model
+    the training data, the training labels, the testing data, and the testing labels
+    """
+    train_data, test_data = train_test_split(data, random_state=1)
+    train_labels, test_labels = train_test_split(labels, random_state=1)
+    model = xgboost.XGBClassifier(max_depth=max_depth, n_estimators=n_estimators)
+    model.fit(train_data, train_labels)
+    return (model, train_data, test_data, train_labels, test_labels)
+
+
+if __name__ == '__main__':
+    clean_csv = pd.read_csv('datasets/clean_data.csv')
+    sentiments = vader.sentiment(clean_csv['content'].tolist())
+    clean_csv['vader'] = [x[3] for x in sentiments]
+    data = clean_csv.drop(['sentiment', 'content', 'tweet_id', 'date'], axis=1)
+    labels = clean_csv['sentiment']
+    model, train_data, test_data, train_labels, test_labels = create_model(data, labels, 6, 5)
+    print(evaluate_model(test_labels, test_data, model))
