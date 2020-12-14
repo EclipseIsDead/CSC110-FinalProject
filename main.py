@@ -20,7 +20,8 @@ if __name__ == "__main__":
     print('Plotting Frequency of Keywords towards Climate Change over Time...')
     date_and_freq.index = pd.to_datetime(date_and_freq.date, format='%Y-%m-%d')
     date_and_freq = date_and_freq.groupby(pd.Grouper(freq='M')).sum()
-    plotting.plot_proper(date_and_freq, 'date', 'frequency', 'tweet', 'Changes in Sentiment Over Time')
+    plotting.plot_proper(date_and_freq, 'date', 'frequency', 'tweet',
+                         'Changes in Sentiment Over Time')
     print('Conducting Sentiment Analysis over time using VADER...')
     data_date_and_vader = [data['date'], data['vader']]
     headers = ['date', 'vader']
